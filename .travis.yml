@@ -16,6 +16,7 @@ before_install:
     conda info -a;
     conda create -y -q -n compas_3x -c conda-forge python=3.6;
     source ~/miniconda/bin/activate compas_3x;
+    pip install -r requirements-dev.txt;
   else
     sudo apt-get update -qq;
     pip install -r requirements-dev.txt;
@@ -35,7 +36,7 @@ deploy:
   skip_cleanup: true
   keep-history: true
   github_token: $GITHUB_TOKEN
-  repo: make-zurich/make-zurich.github.io
+  repo: gonzalocasas/compas-docs
   name: COMPAS doc bot
   target-branch: master
   local_dir: dist/docs
