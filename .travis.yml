@@ -19,16 +19,25 @@ before_install:
   else
     sudo apt-get update -qq;
     pip install -r requirements-dev.txt;
-    pip install travis-sphinx;
   fi
 
 install:
 - python setup.py install;
 
 script:
+- invoke check test
 - if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then
-    travis-sphinx build --nowarn --source=docs;
+    invoke docs;
   fi
 
-# after_success:
-# - travis-sphinx deploy
+deploy:
+  provider: pages
+  skip_cleanup: true
+  keep-history: true
+  github_token: $GITHUB_TOKEN
+  repo: make-zurich/make-zurich.github.io
+  name: COMPAS doc bot
+  target-branch: master
+  local_dir: dist/docs
+  on:
+    branch: develop
