@@ -42,3 +42,4 @@ deploy:
   local_dir: dist/docs
   on:
     branch: develop
+    condition: $TRAVIS_PYTHON_VERSION = 2.7
